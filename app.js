@@ -74,6 +74,7 @@ const sessionConfig = {
     // httpOnly: false,
     // secure true ==> should only work over https
     secure: true,
+    sameSite: 'None',
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7
   }

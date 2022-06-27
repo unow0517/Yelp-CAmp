@@ -71,8 +71,8 @@ const sessionConfig = {
   resave: false,
   saveUninitialized: true,
   cookie: {
-    httpOnly: false,
-    // should only work over https
+    // httpOnly: false,
+    // secure true ==> should only work over https
     secure: true,
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7

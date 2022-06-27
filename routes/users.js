@@ -11,7 +11,7 @@ router.route('/register')
 router.route('/login')
   .get(user.logIn)
   .post(
-    passport.authenticate('local', (err, user, info) => {
+    passport.authenticate('local', (err, user, next) => {
       if (err) {
         return next(err); // will generate a 500 error
       }

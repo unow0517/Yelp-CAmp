@@ -94,6 +94,7 @@ const scriptSrcUrls = [
   "https://kit.fontawesome.com/",
   "https://cdnjs.cloudflare.com/",
   "https://cdn.jsdelivr.net/",
+  "https://*.yoonthedeveloper.com/"
 ];
 const styleSrcUrls = [
   "https://kit-free.fontawesome.com/",
@@ -103,11 +104,13 @@ const styleSrcUrls = [
   "https://fonts.googleapis.com/",
   "https://use.fontawesome.com/",
   "https://cdn.jsdelivr.net/",
+  "https://*.yoonthedeveloper.com/"
 ];
 const connectSrcUrls = [
   "https://*.tiles.mapbox.com",
   "https://api.mapbox.com",
   "https://events.mapbox.com",
+  "https://*.yoonthedeveloper.com/"
 ];
 const fontSrcUrls = [];
 

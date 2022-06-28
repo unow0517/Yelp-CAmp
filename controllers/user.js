@@ -29,6 +29,7 @@ module.exports.logIn = (req, res) => {
 module.exports.postLogIn = (req, res) => {
   req.flash('success', 'you are looged in');
   // if req.session.returnTo exist => it is it , or /campgrounds
+  console.log(req.user)
   const redirectUrl = req.session.returnTo || '/campgrounds';
   delete req.session.returnTo;
   res.redirect(redirectUrl);

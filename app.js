@@ -1,9 +1,10 @@
-// if (process.env.NODE_ENV !== "production") {
-//   require('dotenv').config();
-// }
-const fs = require('fs')
-const http = require('http')
-const https = require('https')
+// For local!!
+if (process.env.NODE_ENV !== "production") {
+  require('dotenv').config();
+}
+
+
+
 const express = require('express')
 const path = require('path');
 const mongoose = require('mongoose');
@@ -73,10 +74,11 @@ const sessionConfig = {
   resave: false,
   saveUninitialized: true,
   cookie: {
-    // httpOnly: false,
-    // secure true ==> should only work over https
-    secure: true,
-    sameSite: 'None',
+    httpOnly: false,
+    // HTTPS!!
+    // // secure true ==> should only work over https
+    // secure: true,
+    // sameSite: 'None',
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7
   }
@@ -151,8 +153,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-  console.log(req.query);
   res.locals.currentUser = req.user;
+  console.log(res.locals.currentUser,'hello');
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   next();
@@ -183,17 +185,20 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render('error',{err})
 })
 
-// const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-// app.listen(port, () => {
-//   console.log(`Serving on port ${port}`)
-// })
+app.listen(port, () => {
+  console.log(`Serving on port ${port}`)
+})
 
-// FOR HTTPS!!
-const options = { // letsencrypt로 받은 인증서 경로를 입력
-  ca: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/fullchain.pem'),
-  key: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/cert.pem')
-  };
-  http.createServer(app).listen(3030);
-  https.createServer(options, app).listen(443);
+// // FOR HTTPS!!
+// const fs = require('fs')
+// const http = require('http')
+// const https = require('https')
+// const options = { // letsencrypt로 받은 인증서 경로를 입력
+//   ca: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/fullchain.pem'),
+//   key: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/privkey.pem'),
+//   cert: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/cert.pem')
+//   };
+//   http.createServer(app).listen(3030);
+//   https.createServer(options, app).listen(443);

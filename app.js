@@ -3,7 +3,7 @@
 // }
 const fs = require('fs')
 const http = require('http')
-const https = requrie('https')
+const https = require('https')
 const express = require('express')
 const path = require('path');
 const mongoose = require('mongoose');

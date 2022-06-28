@@ -73,6 +73,7 @@ const sessionConfig = {
   secret: secret,
   resave: false,
   saveUninitialized: true,
+  proxy: true,
   cookie: {
     httpOnly: false,
     secure: true,

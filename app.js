@@ -195,13 +195,15 @@ app.use((err, req, res, next) => {
 // })
 
 // FOR HTTPS!!
-const fs = require('fs')
-const http = require('http')
-const https = require('https')
-const options = { // letsencrypt로 받은 인증서 경로를 입력
-  ca: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/fullchain.pem'),
-  key: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/cert.pem')
-  };
+// const fs = require('fs')
+
+// const https = require('https')
+// const options = { // letsencrypt로 받은 인증서 경로를 입력
+//   ca: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/fullchain.pem'),
+//   key: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/privkey.pem'),
+//   cert: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/cert.pem')
+//   };
+
+  // https.createServer(options, app).listen(443);
+  const http = require('http')
   http.createServer(app).listen(3030);
-  https.createServer(options, app).listen(443);

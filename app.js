@@ -76,7 +76,7 @@ const sessionConfig = {
   proxy: true,
   cookie: {
     httpOnly: false,
-    secure: true,
+    // secure: true,
     // HTTPS!!
     // // secure true ==> should only work over https
 

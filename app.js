@@ -178,7 +178,17 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render('error',{err})
 })
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Serving on port ${port}`)
-})
+// const port = process.env.PORT || 3000;
+
+// app.listen(port, () => {
+//   console.log(`Serving on port ${port}`)
+// })
+
+// FOR HTTPS!!
+const options = { // letsencrypt로 받은 인증서 경로를 입력
+  ca: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/fullchain.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/cert.pem')
+  };
+  http.createServer(app).listen(3030);
+  https.createServer(options, app).listen(443);

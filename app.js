@@ -75,12 +75,11 @@ const sessionConfig = {
   saveUninitialized: true,
   proxy: true,
   cookie: {
-    httpOnly: false,
-    // secure: true,
+    httpOnly: true,
+    secure: true,
     // HTTPS!!
     // // secure true ==> should only work over https
-
-    // sameSite: 'None',
+    sameSite: 'None',
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7
   }
@@ -195,15 +194,15 @@ app.use((err, req, res, next) => {
 // })
 
 // FOR HTTPS!!
-// const fs = require('fs')
+const fs = require('fs')
 
-// const https = require('https')
-// const options = { // letsencrypt로 받은 인증서 경로를 입력
-//   ca: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/fullchain.pem'),
-//   key: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/privkey.pem'),
-//   cert: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/cert.pem')
-//   };
+const https = require('https')
+const options = { // letsencrypt로 받은 인증서 경로를 입력
+  ca: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/fullchain.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/cert.pem')
+  };
 
-  // https.createServer(options, app).listen(443);
+  https.createServer(options, app).listen(443);
   const http = require('http')
   http.createServer(app).listen(3030);

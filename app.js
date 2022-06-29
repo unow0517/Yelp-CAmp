@@ -198,9 +198,9 @@ const fs = require('fs')
 
 const https = require('https')
 const options = { // letsencrypt로 받은 인증서 경로를 입력
-  ca: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/fullchain.pem'),
-  key: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/a.yoonthedeveloper.com/cert.pem')
+  ca: fs.readFileSync('/etc/letsencrypt/live/yelpcamp.yoonthedeveloper.com/fullchain.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/yelpcamp.yoonthedeveloper.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/yelpcamp.yoonthedeveloper.com/cert.pem')
   };
 
   https.createServer(options, app).listen(443);

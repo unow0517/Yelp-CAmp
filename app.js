@@ -1,8 +1,7 @@
 // For local!!
-if (process.env.NODE_ENV == "development") {
+if (process.env.MODE !== 'deploy') {
   require('dotenv').config();
 }
-
 
 
 const express = require('express')
@@ -25,8 +24,7 @@ const helmet = require('helmet');
 const userRoutes = require('./routes/users')
 const campgroundsRoutes = require('./routes/campgrounds')
 const reviewsRoutes = require('./routes/reviews');
-const dbUrl = process.env.DB_URL
-// const dbUrl = 'mongodb://localhost:27017/yelp-camp'
+const dbUrl = (process.env.MODE === 'deploy') ? process.env.DB_URL : 'mongodb://localhost:27017/yelp-camp'
 
 const MongoDBStore = require("connect-mongo")
 async function main() {
@@ -76,8 +74,8 @@ const sessionConfig = {
   proxy: process.env == 'deploy'? true : false,
   cookie: {
     httpOnly: true,
-    secure: process.env == 'deploy'? true : false ,// secure: true,
-    sameSite: process.env == 'deploy'?'none': 'Lax',
+    secure: (process.env == 'deploy') ? true : false ,
+    sameSite: (process.env == 'deploy') ? 'none': 'Lax',
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7
   }

@@ -1,5 +1,5 @@
 // For local!!
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV == "development") {
   require('dotenv').config();
 }
 
@@ -73,13 +73,11 @@ const sessionConfig = {
   secret: secret,
   resave: false,
   saveUninitialized: true,
-  proxy: true,
+  proxy: process.env == 'deploy'? true : false,
   cookie: {
     httpOnly: true,
-    secure: true,
-    // HTTPS!!
-    // // secure true ==> should only work over https
-    sameSite: 'None',
+    secure: process.env == 'deploy'? true : false ,// secure: true,
+    sameSite: process.env == 'deploy'?'none': 'Lax',
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7
   }
@@ -186,23 +184,23 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render('error',{err})
 })
 
-// // FOR HTTP
-// const port = process.env.PORT || 3000;
+// FOR HTTP
+const port = process.env.PORT || 3000;
 
-// app.listen(port, () => {
-//   console.log(`Serving on port ${port}`)
-// })
+app.listen(port, () => {
+  console.log(`Serving on port ${port}`)
+})
 
-// FOR HTTPS!!
-const fs = require('fs')
+// // FOR HTTPS!!
+// const fs = require('fs')
 
-const https = require('https')
-const options = { // letsencrypt로 받은 인증서 경로를 입력
-  ca: fs.readFileSync('/etc/letsencrypt/live/yelpcamp.yoonthedeveloper.com/fullchain.pem'),
-  key: fs.readFileSync('/etc/letsencrypt/live/yelpcamp.yoonthedeveloper.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/yelpcamp.yoonthedeveloper.com/cert.pem')
-  };
+// const https = require('https')
+// const options = { // letsencrypt로 받은 인증서 경로를 입력
+//   ca: fs.readFileSync('/etc/letsencrypt/live/yelpcamp.yoonthedeveloper.com/fullchain.pem'),
+//   key: fs.readFileSync('/etc/letsencrypt/live/yelpcamp.yoonthedeveloper.com/privkey.pem'),
+//   cert: fs.readFileSync('/etc/letsencrypt/live/yelpcamp.yoonthedeveloper.com/cert.pem')
+//   };
 
-  https.createServer(options, app).listen(443);
-  const http = require('http')
-  http.createServer(app).listen(3030);
+//   https.createServer(options, app).listen(443);
+//   const http = require('http')
+//   http.createServer(app).listen(3030);

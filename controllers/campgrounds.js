@@ -59,8 +59,8 @@ module.exports.idEdit = async (req, res) => {
 const s3 = new S3Client({
   region: 'eu-central-1',
   credentials: {
-    accessKeyId: process.env.aws_access_key_id,
-    secretAccessKey: process.env.aws_secret_access_key,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   }
 })
 

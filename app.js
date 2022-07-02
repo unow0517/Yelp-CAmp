@@ -11,7 +11,7 @@ const ejsMate = require('ejs-mate');
 const ExpressError = require('./utils/ExpressError');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const session = require('express-session'); 
 const flash = require('connect-flash');
 const passport = require('passport');
@@ -24,7 +24,8 @@ const helmet = require('helmet');
 const userRoutes = require('./routes/users')
 const campgroundsRoutes = require('./routes/campgrounds')
 const reviewsRoutes = require('./routes/reviews');
-const dbUrl = (process.env.MODE === 'deploy') ? process.env.DB_URL : 'mongodb://localhost:27017/yelp-camp'
+// const dbUrl = (process.env.MODE == 'deploy') ? process.env.DB_URL : 'mongodb://localhost:27017/yelp-camp'
+const dbUrl = process.env.DB_URL;
 
 const MongoDBStore = require("connect-mongo")
 async function main() {
@@ -193,11 +194,11 @@ app.use((err, req, res, next) => {
 const fs = require('fs')
 
 const https = require('https')
-const options = { // letsencrypt로 받은 인증서 경로를 입력
+const options = (process.env.MODE === 'deploy') ? { // letsencrypt로 받은 인증서 경로를 입력
   ca: fs.readFileSync('/etc/letsencrypt/live/yelpcamp.yoonthedeveloper.com/fullchain.pem'),
   key: fs.readFileSync('/etc/letsencrypt/live/yelpcamp.yoonthedeveloper.com/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/yelpcamp.yoonthedeveloper.com/cert.pem')
-  };
+} : '';
 
   https.createServer(options, app).listen(443);
   const http = require('http')

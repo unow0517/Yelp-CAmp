@@ -12,7 +12,7 @@ const multerS3 = require('multer-s3')
 const { S3Client, CreateBucketCommand, PutBucketAclCommand } = require('@aws-sdk/client-s3')
 
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.MODE !== 'deploy') {
   require('dotenv').config();
 } 
 
